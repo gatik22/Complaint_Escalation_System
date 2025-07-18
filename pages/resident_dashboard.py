@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_option_menu import option_menu # type: ignore
 from components.complaints_form import ComplaintForm
 from components.profile_management import ProfileManagement
 from utils.mysql_db import ComplaintDB
@@ -27,7 +28,23 @@ class ResidentDashboard:
             return
 
     # Navigation radio to switch views
-        choice = st.radio("Select Option", ["Submit Complaint", "View Past Complaints", "My Profile"])
+        # New:
+        with st.sidebar:
+            choice = option_menu(
+            "",
+            ["Submit Complaint", "View Past Complaints", "My Profile"],
+            icons=['list-plus', 'clock-history', 'person-circle'],
+            menu_icon="cast", default_index=0
+            
+        )
+            st.markdown("---")
+            logout_clicked = st.button("Logout", use_container_width=True) 
+        if logout_clicked:
+            st.session_state.logged_in = False
+            st.session_state.user_role = None
+            st.session_state.username = None
+            st.session_state.current_page = 'landing'
+            st.rerun()
 
         if choice == "Submit Complaint":
             form = ComplaintForm(self.username, self.db)

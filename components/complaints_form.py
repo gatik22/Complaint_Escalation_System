@@ -30,9 +30,7 @@ class ComplaintForm:
                 submitted = st.form_submit_button("Submit")
             with col2:
                 st.write("")  # Empty column for spacing
-            with col3:
-                logout = st.form_submit_button("Logout")
-
+            
         # Handle Submit button click
         if submitted:
             if not complaint_text.strip():
@@ -70,9 +68,4 @@ class ComplaintForm:
                 st.error(f"Failed to submit complaint: {e}")
 
         # Handle Logout button click
-        if logout:
-            st.session_state.logged_in = False
-            st.session_state.user_role = None
-            st.session_state.username = None
-            st.session_state.current_page = 'landing'
-            st.rerun()
+        
