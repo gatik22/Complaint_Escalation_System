@@ -41,7 +41,6 @@ class AdminDashboard:
                     st.write("_No photo attached to this complaint._")
         st.markdown("---")
           
-
     st.markdown("---")
     def show_profile(self):
         st.subheader("My Profile")
@@ -62,7 +61,6 @@ class AdminDashboard:
             if logout_clicked:
                 self.logout()
 
-        # Main heading (if desired, adjust for look)
         st.title("Admin Dashboard")
 
         # Render the main content based on sidebar selection
